@@ -1,0 +1,103 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<dict:dictionary xmlns:dict="http://salveblues.ru/dict">
+  <section>
+    <title>Grammar types</title>
+    <file>dictionary_grammars.xml</file>
+  </section>
+  <section>
+    <title>Typing</title>
+    <file>dictionary_types.xml</file>
+  </section>
+  <section>
+    <title>Paradigms</title>
+    <file>dictionary_paradigms.xml</file>
+  </section>
+  <section>
+    <title>OO</title>
+    <file>dictionary_oo.xml</file>
+  </section>
+  	<term>
+		<ab><w>DSL</w></ab>
+		<en><w>domain-specific language</w></en>
+		<nl><w>domein-specifieke taal</w></nl>
+		<ru><w>предметно-ориентированный язык</w><wiki> программирования</wiki></ru>
+	</term>
+	<term>
+		<ab><w>API</w></ab>
+		<en><w>application programming interface</w></en>
+		<de><w>Programmierschnittstelle</w><wiki/></de>
+		<ru><w>интерфейс программирования приложений</w><wiki/></ru>
+	</term>
+	<term>
+		<en><w>parsing</w></en>
+		<ru><w>разбор</w></ru>
+		<nl><w>parsering</w></nl>
+	</term>
+	<term>
+		<en><w>parse tree</w></en>
+		<ru><w>дерево разбора</w></ru>
+		<nl><w>parseboom</w></nl>
+	</term>
+	<term>
+		<ab><w>AST</w></ab>
+		<en><w>abstract syntax tree</w></en>
+		<de><w>abstrakter Syntaxbaum</w><wiki/></de>
+		<ru><w>абстрактное синтаксическое дерево</w><wiki/></ru>
+	</term>
+	<term>
+		<en><w>traversal</w></en>
+		<ru><w>обход</w></ru>
+		<de><w>Traversierung</w></de>
+	</term>
+	<term>
+		<en><w>continuation</w></en>
+		<ru><w>продолжение</w><wiki/></ru>
+	</term>
+	<term>
+		<en><w>closure</w><wiki> (computer_science)</wiki></en>
+		<ru><w>замыкание</w><wiki> (программирование)</wiki></ru>
+		<de><w>Funktionsabschluss</w><wiki/></de>
+	</term>
+	<term>
+		<en><w>scope</w><wiki> (programming)</wiki></en>
+		<ru><w>область видимости переменной</w><src>http://programmersclub.ru/12/</src></ru>
+		<nl><w>variabelenbereik</w><wiki/></nl>
+	</term>
+	<term>
+		<ab><w>UI</w></ab>
+		<en><w>user interface</w></en>
+		<nl><w>gebruikersomgeving</w><wiki/></nl>
+		<de><w>Benutzerschnittstelle</w><wiki/></de>
+		<ru><w>интерфейс пользователя</w><wiki/></ru>
+	</term>
+	<term>
+		<en><w>pattern matching</w></en>
+		<nl><w>patroonherkenning</w><wiki> (informatica)</wiki></nl>
+		<de><w>Musterabgleich</w></de>
+		<ru><w>сопоставление с образцом</w><wiki/></ru>
+	</term>
+	<term>
+		<ab><w>regex</w></ab>
+		<en><w>regular expression</w><wiki/></en>
+		<nl><w>reguliere expressie</w><wiki/></nl>
+		<de><w>regulärer Ausdruck</w><wiki/></de>
+		<ru><w>регулярное выражение</w><src>http://ru.wikipedia.org/wiki/Регулярные_выражения</src></ru>
+	</term>
+	<term>
+		<en><w>program slicing</w><wiki/></en>
+		<ru><w>программное сечение</w></ru>
+	</term>
+	<term>
+		<en><w>mixin</w><wiki/></en>
+		<ru><w>примесь</w><wiki> (программирование)</wiki></ru>
+	</term>
+	<term>
+		<en><w>code reuse</w><wiki/></en>
+		<ru><w>повторное использование кода</w><wiki/></ru>
+	</term>
+	<term>
+		<ab><w>CCC</w></ab>
+		<en><w>cross-cutting concern</w><wiki/></en>
+		<ru><w>сквозная функциональность</w><src>http://www.proz.com/kudoz/english_to_russian/computers:_software/3282161-crosscutting_concerns.html</src></ru>
+	</term>
+</dict:dictionary>
