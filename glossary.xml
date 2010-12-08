@@ -2,19 +2,19 @@
 <dict:glossary xmlns:dict="http://grammarware.net/dict">
   <section>
     <title>Grammar types</title>
-    <file>dictionary_grammars.xml</file>
+    <file>glossary_grammars.xml</file>
   </section>
   <section>
     <title>Typing</title>
-    <file>dictionary_types.xml</file>
+    <file>glossary_types.xml</file>
   </section>
   <section>
     <title>Paradigms</title>
-    <file>dictionary_paradigms.xml</file>
+    <file>glossary_paradigms.xml</file>
   </section>
   <section>
     <title>OO</title>
-    <file>dictionary_oo.xml</file>
+    <file>glossary_oo.xml</file>
   </section>
   	<term>
 		<ab><w>DSL</w></ab>
