@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<dict:glossary xmlns:dict="http://grammarware.net/dict">
+	<term>
+		<ab><w>OO</w></ab>
+		<en><w>object-oriented</w><wiki>Object-oriented programming</wiki></en>
+		<ru><w>объектно-ориентированный</w></ru>
+		<nl><w>objectgeoriënteerd</w><wiki/></nl>
+	</term>
+	<term>
+		<en><w>abstraction</w><wiki>Abstraction (computer science)</wiki></en>
+		<ru><w>абстракция данных</w><wiki/></ru>
+	</term>
+	<term>
+		<en><w>encapsulation</w><wiki>Encapsulation (computer science)</wiki></en>
+		<ru><w>инкапсуляция</w><wiki>Инкапсуляция (программирование)</wiki></ru>
+		<nl><w>inkapseling</w><wiki/></nl>
+	</term>
+	<term>
+		<en><w>inheritance</w><wiki>Inheritance (object-oriented programming)</wiki></en>
+		<ru><w>наследование</w><wiki>Наследование (программирование)</wiki></ru>
+		<de><w>Vererbung</w><wiki>Vererbung (Programmierung)</wiki></de>
+		<nl><w>overerving</w><wiki>Overerving (informatica)</wiki></nl>
+	</term>
+	<term>
+		<en><w>multiple inheritance</w><wiki/></en>
+		<ru><w>множественное наследование</w><wiki/></ru>
+		<de><w>Mehrfachvererbung</w><wiki/></de>
+	</term>
+	<term>
+		<en><w>virtual inheritance</w><wiki/></en>
+		<ru><w>виртуальное наследование</w><wiki/></ru>
+	</term>
+	<term>
+		<en><w>differential inheritance</w><src>https://developer.mozilla.org/en/Differential_inheritance_in_JavaScript</src></en>
+		<ru><w>дифференциальное наследование</w></ru>
+	</term>
+	<term>
+		<en><w>diamond problem</w><wiki/></en>
+		<ru><w>проблема ромба</w></ru>
+	</term>
+	<term>
+		<en><w>type polymorphism</w><wiki/></en>
+		<ru><w>полиморфизм</w><wiki>Полиморфизм (программирование)</wiki></ru>
+	</term>
+</dict:glossary>

@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<dict:glossary xmlns:dict="http://grammarware.net/dict">
+	<term>
+		<en><w>grammar</w></en>
+		<ru><w>грамматика</w></ru>
+		<nl><w>grammatica</w></nl>
+		<de><w>Grammatik</w></de>
+	</term>
+	<term>
+		<ab><w>CFG</w></ab>
+		<en><w>context-free grammar</w></en>
+		<ru><w>контекстно-свободная грамматика</w><wiki/></ru>
+		<nl><w>context-vrije grammatica</w><wiki/></nl>
+		<de><w>kontextfreie Grammatik</w><wiki/></de>
+	</term>
+	<term>
+		<ab><w>DCG</w></ab>
+		<en><w>definite clause grammar</w><wiki/></en>
+		<ru><w>предикативная грамматика</w><src>http://public.uic.rsu.ru/~skritski/scourses/Transl/Langs3.htm</src></ru>
+	</term>
+	<term>
+		<en><w>generative grammar</w><wiki/></en>
+		<ru><w>порождающая грамматика</w><wiki>Формальная грамматика#.D0.9F.D0.BE.D1.80.D0.BE.D0.B6.D0.B4.D0.B0.D1.8E.D1.89.D0.B8.D0.B5_.D0.B3.D1.80.D0.B0.D0.BC.D0.BC.D0.B0.D1.82.D0.B8.D0.BA.D0.B8</wiki></ru>
+		<nl><w>generatieve grammatica</w><wiki>Generatieve taalkunde</wiki></nl>
+		<de><w>generative Grammatik</w><wiki/></de>
+	</term>
+	<term>
+		<en><w>analytic grammar</w><wiki/></en>
+		<ru><w>распознающая грамматика</w><wiki>Формальная грамматика#.D0.90.D0.BD.D0.B0.D0.BB.D0.B8.D1.82.D0.B8.D1.87.D0.B5.D1.81.D0.BA.D0.B8.D0.B5_.D0.B3.D1.80.D0.B0.D0.BC.D0.BC.D0.B0.D1.82.D0.B8.D0.BA.D0.B8</wiki></ru>
+		<nl><w>analytische grammatica</w></nl>
+	</term>
+	<term>
+		<ab><w>PEG</w></ab>
+		<en><w>parsing expression grammar</w><wiki/></en>
+		<ru><w>грамматика, разбирающая выражение</w><wiki/></ru>
+	</term>
+	<term>
+		<ab><w>EBNF</w></ab>
+		<en><w>Extended Backus–Naur Form</w><wiki/></en>
+		<de><w>Erweiterte Backus-Naur-Form</w><wiki/></de>
+		<ru><w>расширенная форма Бэкуса — Наура</w><wiki/></ru>
+	</term>
+	<term>
+		<en><w>ambiguous grammar</w><wiki/></en>
+		<de><w>mehrdeutige Grammatik</w><wiki/></de>
+		<nl><w>ambigue grammatica</w><wiki/></nl>
+		<ru><w>неоднозначная грамматика</w><wiki/></ru>
+	</term>
+</dict:glossary>
