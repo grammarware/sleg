@@ -13,6 +13,10 @@
     <file>glossary_paradigms.xml</file>
   </section>
   <section>
+    <title>Grammar transformation</title>
+    <file>glossary_xbgf.xml</file>
+  </section>
+  <section>
     <title>OO</title>
     <file>glossary_oo.xml</file>
   </section>
@@ -24,7 +28,7 @@
 	</term>
 	<term>
 		<ab><w>API</w></ab>
-		<en><w>application programming interface</w></en>
+		<en><w>application programming interface</w><wiki/></en>
 		<de><w>Programmierschnittstelle</w><wiki/></de>
 		<ru><w>интерфейс программирования приложений</w><wiki/></ru>
 	</term>
@@ -50,7 +54,7 @@
 		<de><w>Traversierung</w></de>
 	</term>
 	<term>
-		<en><w>continuation</w></en>
+		<en><w>continuation</w><wiki/></en>
 		<ru><w>продолжение</w><wiki/></ru>
 	</term>
 	<term>
@@ -71,9 +75,9 @@
 		<ru><w>интерфейс пользователя</w><wiki/></ru>
 	</term>
 	<term>
-		<en><w>pattern matching</w></en>
+		<en><w>pattern matching</w><wiki/></en>
 		<nl><w>patroonherkenning</w><wiki>Patroonherkenning (informatica)</wiki></nl>
-		<de><w>Musterabgleich</w></de>
+		<de><w>Musterabgleich</w><wiki>Pattern Matching</wiki></de>
 		<ru><w>сопоставление с образцом</w><wiki/></ru>
 	</term>
 	<term>
