@@ -35,6 +35,10 @@
 		<ru><w>грамматика, разбирающая выражение</w><wiki/></ru>
 	</term>
 	<term>
+		<en><w>position restricted grammar</w><wiki/></en>
+		<ru><w>грамматика, разбирающая выражение</w><wiki/></ru>
+	</term>
+	<term>
 		<ab><w>EBNF</w></ab>
 		<en><w>Extended Backus–Naur Form</w><wiki/></en>
 		<de><w>Erweiterte Backus-Naur-Form</w><wiki/></de>

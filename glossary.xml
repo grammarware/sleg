@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <dict:glossary xmlns:dict="http://grammarware.net/dict">
   <section>
-    <title>Grammar types</title>
+    <title>Grammar types and forms</title>
     <file>glossary_grammars.xml</file>
   </section>
   <section>
@@ -15,6 +15,10 @@
   <section>
     <title>Grammar transformation</title>
     <file>glossary_xbgf.xml</file>
+  </section>
+  <section>
+    <title>Grammar related concepts</title>
+    <file>glossary_grammarware.xml</file>
   </section>
   <section>
     <title>OO</title>
@@ -103,5 +107,10 @@
 		<ab><w>CCC</w></ab>
 		<en><w>cross-cutting concern</w><wiki/></en>
 		<ru><w>сквозная функциональность</w><src>http://www.proz.com/kudoz/english_to_russian/computers:_software/3282161-crosscutting_concerns.html</src></ru>
+	</term>
+	<term>
+		<ab><w>MI</w></ab>
+		<en><w>maintainability index</w><wiki/></en>
+		<ru><w>индекс эксплуатационной надёжности</w><src>http://www.pcweek.ru/themes/detail.php?ID=83423</src></ru>
 	</term>
 </dict:glossary>
