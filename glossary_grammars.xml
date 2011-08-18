@@ -35,8 +35,7 @@
 		<ru><w>грамматика, разбирающая выражение</w><wiki/></ru>
 	</term>
 	<term>
-		<en><w>position restricted grammar</w><wiki/></en>
-		<ru><w>грамматика, разбирающая выражение</w><wiki/></ru>
+		<en><w>position restricted grammar</w><src>http://dx.doi.org/10.1007/3-540-10856-4_102</src></en>
 	</term>
 	<term>
 		<ab><w>EBNF</w></ab>

@@ -100,10 +100,6 @@
 		<ru><w>примесь</w><wiki>Примесь (программирование)</wiki></ru>
 	</term>
 	<term>
-		<en><w>code reuse</w><wiki/></en>
-		<ru><w>повторное использование кода</w><wiki/></ru>
-	</term>
-	<term>
 		<ab><w>CCC</w></ab>
 		<en><w>cross-cutting concern</w><wiki/></en>
 		<ru><w>сквозная функциональность</w><src>http://www.proz.com/kudoz/english_to_russian/computers:_software/3282161-crosscutting_concerns.html</src></ru>

@@ -67,7 +67,7 @@
 		<ru><w>ментальное программирование</w><src>http://www.piter.com/attachment.php?barcode=978546900118&amp;at=cont&amp;n=0</src></ru>
 	</term>
   	<term>
-		<ru><w>доказательное программирование</w><wiki/></ru>
+		<ru><w>доказательное программирование</w><src>http://ru.wikipedia.org/w/index.php?title=Доказательное_программирование&amp;oldid=30648733</src></ru>
 	</term>
   	<term>
 		<en><w>generative programming</w><wiki>Automatic programming#Generative programming</wiki></en>
@@ -89,4 +89,50 @@
 		<en><w>literate programming</w><wiki/></en>
 		<ru><w>грамотное программирование</w><wiki/></ru>
 	</term> 
+  	<term>
+		<en><w>copy and paste programming</w><wiki/></en>
+	</term> 
+	<term>
+		<en><w>code reuse</w><wiki/></en>
+		<ru><w>повторное использование кода</w><wiki/><wbooks>Reuse. Методология повторного использования</wbooks></ru>
+	</term>
+  	<term>
+		<en><w>cargo cult programming</w><wiki/></en>
+		<ru><w>программирование самолётопоклонников</w></ru>
+	</term> 
+  	<term>
+		<en><w>shotgun debugging</w><wiki/></en>
+	</term> 
+  	<term>
+		<en><w>backward compatibility</w><wiki/></en>
+		<ru><w>обратная совместимость</w><wiki/></ru>
+		<nl><w>achterwaartse compatibiliteit</w><wiki/></nl>
+	</term> 
+  	<term>
+		<en><w>design by committee</w><wiki/></en>
+		<ru><w>разработка комитетом</w><wiki/></ru>
+	</term> 
+  	<term>
+		<en><w>waterfall model</w><wiki/></en>
+		<ru><w>модель водопада</w><wiki/></ru>
+		<nl><w>watervalmethode</w><wiki/></nl>
+		<de><w>Wasserfallmodell</w><wiki/></de>
+	</term> 
+  	<term>
+		<en><w>sequential coupling</w><wiki/></en>
+	</term> 
+  	<term>
+		<en><w>spaghetti code</w><wiki/></en>
+		<ru><w>спагетти-код</w><wiki/></ru>
+		<de><w>Spaghetticode</w><wiki/></de>
+	</term>
+  	<term>
+		<en><w>tester driven development</w><wiki/></en>
+	</term>
+  	<term>
+		<ab><w>TDD</w></ab>
+		<en><w>test-driven development</w><wiki/></en>
+		<ru><w>разработка через тестирование</w><wiki/></ru>
+		<de><w>Testgetriebene Entwicklung</w><wiki/></de>
+	</term>
 </dict:glossary>

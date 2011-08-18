@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <dict:glossary xmlns:dict="http://grammarware.net/dict">
 	<term>
-		<en><w>type system</w></en>
-		<ru><w>система типов</w></ru>
+		<en><w>type system</w><wiki/></en>
+		<ru><w>система типизации</w><wiki>Типизация данных</wiki></ru>
 		<de><w>Typsystem</w><wiki/></de>
 		<nl><w>type systeem</w><wiki/></nl>
 	</term>
@@ -11,8 +11,16 @@
 		<ru><w>статическая типизация</w><wiki/></ru>
 	</term>
 	<term>
+		<en><w>strong typing</w><wiki/></en>
+		<ru><w>строгая типизация</w><wiki/></ru>
+	</term>
+	<term>
 		<en><w>dynamic typing</w></en>
 		<ru><w>динамическая типизация</w><wiki/></ru>
+	</term>
+	<term>
+		<en><w>weak typing</w><wiki/></en>
+		<ru><w>слабая типизация</w></ru>
 	</term>
 	<term>
 		<ab><w>ADT</w></ab>
@@ -22,27 +30,31 @@
 		<nl><w>abstract datatype</w><wiki/></nl>
 	</term>
 	<term>
-		<en><w>algebraic data type</w></en>
+		<en><w>algebraic data type</w><wiki/></en>
 		<nl><w>algebraïsch datatype</w><wiki/></nl>
 		<ru><w>алгебраический тип данных</w><wiki/></ru>
 	</term>
 	<term>
 		<ab><w>GADT</w></ab>
-		<en><w>generalized algebraic datatype</w><src>http://www.haskell.org/haskellwiki/Generalised_algebraic_datatype</src></en>
+		<en><w>generalized algebraic data type</w><wiki/><src>http://www.haskell.org/haskellwiki/Generalised_algebraic_datatype</src></en>
 		<ru><w>обобщённый алгебраический тип данных</w><wiki/></ru>
 	</term>
 	<term>
-		<en><w>duck typing</w></en>
+		<en><w>duck typing</w><wiki/></en>
 		<ru><w>утиная типизация</w><wiki/></ru>
 	</term>
 	<term>
-		<en><w>type conversion</w></en>
+		<en><w>typecasting</w><wiki>Type conversion</wiki></en>
 		<ru><w>приведение типа</w><wiki/></ru>
 		<nl><w>typeconversie</w><wiki/></nl>
 		<de><w>Typumwandlung</w><wiki/></de>
 	</term>
 	<term>
 		<en><w>container</w><wiki>Container (data structure)</wiki></en>
+		<ru><w>контейтер</w><wiki>Контейнер (программирование)</wiki></ru>
+	</term>
+	<term>
+		<en><w>collection</w><wiki>Collection (computing)</wiki></en>
 		<ru><w>коллекция</w><wiki>Коллекция (программирование)</wiki></ru>
 	</term>
 </dict:glossary>
