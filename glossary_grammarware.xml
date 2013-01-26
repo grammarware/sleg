@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<dict:glossary xmlns:dict="http://grammarware.net/dict">
+	<term>
+		<en><w>disambiguating rules</w></en>
+		<ru><w>правила устранения неоднозначностей</w></ru>
+	</term>
+	<term>
+		<en><w>terminal</w></en>
+		<ru><w>терминал</w></ru>
+	</term>
+	<term>
+		<en><w>nonterminal</w></en>
+		<ru><w>нетерминал</w></ru>
+	</term>
+	<term>
+		<en><w>starting symbol</w></en>
+		<ru><w>стартовый символ</w></ru>
+	</term>
+	<term>
+		<en><w>production rule</w></en>
+		<ru><w>продукция</w></ru>
+	</term>
+	<term>
+		<en><w>viable prefix</w><wiki/></en>
+		<ru><w>корректный префикс</w></ru>
+	</term>
+	<term>
+		<en><w>leftmost derivation</w></en>
+		<ru><w>левое порождение</w></ru>
+	</term>
+	<term>
+		<en><w>rightmost derivation</w></en>
+		<ru><w>правое порождение</w></ru>
+	</term>
+	<term>
+		<en><w>sentential form</w><src>http://www.seas.upenn.edu/~cit596/notes/dave/cfg7.html</src></en>
+		<ru><w>сентенциальная форма</w><src>http://www.classes.ru/dictionary-english-russian-polytechnicalenru-term-139751.htm</src></ru><!-- цепочечная? пропозициональная? -->
+	</term>
+	<term>
+		<en><w>yield</w></en>
+		<ru><w>крона</w></ru>
+	</term>
+	<term>
+		<en><w>frontier</w></en>
+		<ru><w>граница</w></ru>
+	</term>
+</dict:glossary>

@@ -1,0 +1,138 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<dict:glossary xmlns:dict="http://grammarware.net/dict">
+  	<term>
+		<en><w>multi-paradigm programming</w></en>
+		<ru><w>мультипарадигмальное программирование</w><wiki/></ru>
+	</term>
+  	<term>
+		<ab><w>AOP</w></ab>
+		<en><w>aspect-oriented programming</w><wiki/></en>
+		<ru><w>аспектно-ориентированное программирование</w><wiki/></ru>
+		<de><w>aspektorientierte Programmierung</w><wiki/></de>
+		<nl><w>aspectgeoriënteerd programmeren</w><wiki/></nl>
+	</term>
+  	<term>
+		<ab><w>@OP</w></ab>
+		<en><w>attribute-oriented programming</w><src>http://en.wikipedia.org/wiki/Attribute-Oriented_Programming</src></en>
+	</term>
+  	<term>
+		<en><w>imperative programming</w><wiki/></en>
+		<de><w>imperative Programmierung</w><wiki/></de>
+		<ru><w>императивное программирование</w><wiki/></ru>
+		<nl><w>imperatief programmeren</w><wiki/></nl>
+	</term>
+  	<term>
+		<en><w>structured programming</w><wiki/></en>
+		<de><w>strukturierte Programmierung</w><wiki/></de>
+		<ru><w>структурное программирование</w><wiki/></ru>
+		<nl><w>gestructureerd programmeren</w><wiki/></nl>
+	</term>
+  	<term>
+		<en><w>functional programming</w><wiki/></en>
+		<de><w>funktionale Programmierung</w><wiki/></de>
+		<ru><w>функциональное программирование</w><wiki/></ru>
+		<nl><w>functioneel programmeren</w><wiki/></nl>
+	</term>
+  	<term>
+		<en><w>logic programming</w><wiki/></en>
+		<de><w>logische Programmierung</w><wiki/></de>
+		<ru><w>логическое программирование</w><wiki/></ru>
+		<nl><w>logisch programmeren</w><wiki/></nl>
+	</term>
+  	<term>
+		<en><w>procedural programming</w><wiki/></en>
+		<de><w>prozedurale Programmierung</w><wiki/></de>
+		<ru><w>процедурное программирование</w><wiki/></ru>
+		<nl><w>procedureel programmeren</w><wiki>Imperatief programmeren</wiki></nl>
+	</term>
+  	<term>
+		<en><w>declarative programming</w><wiki/></en>
+		<de><w>deklarative Programmierung</w><wiki/></de>
+		<ru><w>декларативное программирование</w><wiki/></ru>
+		<nl><w>declaratief programmeren</w><wiki>Declaratieve taal</wiki></nl>
+	</term>
+  	<term>
+		<en><w>applicative programming</w><wiki>Applicative programming language</wiki></en>
+		<ru><w>аппликативное программирование</w><wiki>Аппликативный подход к программированию</wiki></ru>
+	</term>
+  	<term>
+		<en><w>generic programming</w><wiki/></en>
+		<de><w>generische Programmierung</w><wiki/></de>
+		<ru><w>обобщённое программирование</w><wiki/></ru>
+		<nl><w>generiek programmeren</w><wiki>Genericiteit (programmeertaalvoorziening)</wiki></nl>
+	</term>
+	<term>
+		<en><w>intentional programming</w><wiki/></en>
+		<de><w>intentionale Programmierung</w><wiki/></de>
+		<ru><w>ментальное программирование</w><src>http://www.piter.com/attachment.php?barcode=978546900118&amp;at=cont&amp;n=0</src></ru>
+	</term>
+  	<term>
+		<ru><w>доказательное программирование</w><src>http://ru.wikipedia.org/w/index.php?title=Доказательное_программирование&amp;oldid=30648733</src></ru>
+	</term>
+  	<term>
+		<en><w>generative programming</w><wiki>Automatic programming#Generative programming</wiki></en>
+		<de><w>generative Programmierung</w><wiki/></de>
+		<ru><w>порождающее программирование</w><wbooks/></ru>
+	</term>
+  	<term>
+		<en><w>event-driven programming</w><wiki/></en>
+		<de><w>ereignisorientierte Programmierung</w><wiki/></de>
+		<ru><w>событийно-ориентированное программирование</w><wiki/></ru>
+	</term>
+  	<term>
+		<ab><w>CBSE</w></ab>
+		<en><w>component-based software engineering</w><wiki/></en>
+		<de><w>komponentenbasierte Entwicklung</w><wiki/></de>
+		<ru><w>компонентно-ориентированное программирование</w><wiki/></ru>
+	</term>
+  	<term>
+		<en><w>literate programming</w><wiki/></en>
+		<ru><w>грамотное программирование</w><wiki/></ru>
+	</term> 
+  	<term>
+		<en><w>copy and paste programming</w><wiki/></en>
+	</term> 
+	<term>
+		<en><w>code reuse</w><wiki/></en>
+		<ru><w>повторное использование кода</w><wiki/><wbooks>Reuse. Методология повторного использования</wbooks></ru>
+	</term>
+  	<term>
+		<en><w>cargo cult programming</w><wiki/></en>
+		<ru><w>программирование самолётопоклонников</w></ru>
+	</term> 
+  	<term>
+		<en><w>shotgun debugging</w><wiki/></en>
+	</term> 
+  	<term>
+		<en><w>backward compatibility</w><wiki/></en>
+		<ru><w>обратная совместимость</w><wiki/></ru>
+		<nl><w>achterwaartse compatibiliteit</w><wiki/></nl>
+	</term> 
+  	<term>
+		<en><w>design by committee</w><wiki/></en>
+		<ru><w>разработка комитетом</w><wiki/></ru>
+	</term> 
+  	<term>
+		<en><w>waterfall model</w><wiki/></en>
+		<ru><w>модель водопада</w><wiki/></ru>
+		<nl><w>watervalmethode</w><wiki/></nl>
+		<de><w>Wasserfallmodell</w><wiki/></de>
+	</term> 
+  	<term>
+		<en><w>sequential coupling</w><wiki/></en>
+	</term> 
+  	<term>
+		<en><w>spaghetti code</w><wiki/></en>
+		<ru><w>спагетти-код</w><wiki/></ru>
+		<de><w>Spaghetticode</w><wiki/></de>
+	</term>
+  	<term>
+		<en><w>tester driven development</w><wiki/></en>
+	</term>
+  	<term>
+		<ab><w>TDD</w></ab>
+		<en><w>test-driven development</w><wiki/></en>
+		<ru><w>разработка через тестирование</w><wiki/></ru>
+		<de><w>Testgetriebene Entwicklung</w><wiki/></de>
+	</term>
+</dict:glossary>
