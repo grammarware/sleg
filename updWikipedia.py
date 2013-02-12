@@ -33,6 +33,9 @@ for root, dirs, filenames in os.walk('wiki/'):
 				continue
 			for chunk in line.split('[')[1:]:
 				name = chunk.split(']')[0]
+				if chunk.find('](')<0 or chunk.find('))')<0:
+					print 'Skip line',chunk.strip()
+					continue
 				link = chunk.split('](')[1].split('))')[0]
 				if name == 'Wikipedia':
 					links.append(link)
