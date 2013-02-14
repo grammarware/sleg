@@ -3,7 +3,7 @@ import os
 import sys
 
 languages = ('Abbreviated as', 'English', 'German', 'French', 'Dutch', 'Russian')
-flags =     (''              ,  'UK'    , 'DE'    , 'FR'    , 'NL'   , 'RU')
+flags =     (''              ,  'EN'    , 'DE'    , 'FR'    , 'NL'   , 'RU')
 code = ('**','[[')
 
 class WikiPage:
@@ -56,18 +56,19 @@ class WikiPage:
 		<html xmlns="http://www.w3.org/1999/xhtml" xmlns:xhtml="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
 		<head>
 			<meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
-			<meta name="keywords" content="software language engineering,glossary,%s"/>
+			<meta name="keywords" content="software language engineering,book of knowledge,glossary,%s"/>
 			<title>S(L)EBOK — SLEG — %s</title>
-			<link href="sleg.css" rel="stylesheet" type="text/css"/>
+			<link href="www/sleg.css" rel="stylesheet" type="text/css"/>
 		</head>
 		<body>
 		<div class="left">
-			<a href="/"><img src="http://grammarware.github.com/logos/sleg.200.png" alt="Software Language Engineering Glossary (SLEG)"/></a><br/>
-			[<a href="http://github.com/grammarware/sleg/wiki/%s">Edit!</a>]<br/>
-			<a href="http://creativecommons.org/licenses/by-sa/3.0/" title="CC-BY-SA"><img src="cc-by-sa.png" alt="CC-BY-SA" class="pad"/></a><br/>
-			<a href="http://validator.w3.org/check/referer" title="XHTML 1.0 W3C Rec"><img src="xhtml10.png" alt="XHTML 1.0 W3C Rec" /></a><br/>
-			<a href="http://jigsaw.w3.org/css-validator/check/referer" title="CSS 2.1 W3C CanRec"><img src="css21.png" alt="CSS 2.1 W3C CanRec" /></a><br/>
-			<div class="pad">[<a href="mailto:vadim@grammarware.net">Complain!</a>]</div>
+			<a href="/"><img src="www/sleg.200.png" alt="Software Language Engineering Glossary (SLEG)" class="pad"/></a><br/>
+			<div class="pad">[<a href="http://github.com/grammarware/sleg/wiki/%s">Edit!</a>]</div><br/>
+			<a href="http://creativecommons.org/licenses/by-sa/3.0/" title="CC-BY-SA"><img src="www/cc-by-sa.png" alt="CC-BY-SA"/></a><br/>
+			<a href="http://creativecommons.org/licenses/by-sa/3.0/" title="Open Knowledge"><img src="www/open-knowledge.png" alt="Open Knowledge" class="pad" /></a><br/>
+			<a href="http://validator.w3.org/check/referer" title="XHTML 1.0 W3C Rec"><img src="www/xhtml10.png" alt="XHTML 1.0 W3C Rec" /></a><br/>
+			<a href="http://jigsaw.w3.org/css-validator/check/referer" title="CSS 2.1 W3C CanRec"><img src="www/css21.png" alt="CSS 2.1 W3C CanRec" class="pad" /></a><br/>
+			<div>[<a href="mailto:vadim@grammarware.net">Complain!</a>]</div>
 		</div>
 		<div class="main">
 		''' % (','.join(self.getNames()), main.capitalize(), self.main)
@@ -101,7 +102,7 @@ class WikiPage:
 	def getFlag(self, key):
 		f = flags[languages.index(key)]
 		if f:
-			return '<img src="%s.png" alt="%s"/>' % (f, key)
+			return '<img src="www/%s.png" alt="%s"/>' % (f, key)
 		else:
 			return ''
 	def __str__(self):
