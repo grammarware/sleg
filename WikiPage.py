@@ -8,6 +8,7 @@ code = ('**','[[')
 
 class WikiPage:
 	def __init__(self, fname):
+		self.main = fname
 		self.items = {}
 		self.pubs = []
 		self.defin = None
@@ -60,23 +61,43 @@ class WikiPage:
 			<link href="sleg.css" rel="stylesheet" type="text/css"/>
 		</head>
 		<body>
-		<ul>
-		''' % (','.join(self.getNames()), main.capitalize())
+		<div class="left">
+			<a href="/"><img src="http://grammarware.github.com/logos/sleg.200.png" alt="Software Language Engineering Glossary (SLEG)"/></a><br/>
+			[<a href="http://github.com/grammarware/sleg/wiki/%s">Edit!</a>]<br/>
+			<a href="http://creativecommons.org/licenses/by-sa/3.0/" title="CC-BY-SA"><img src="cc-by-sa.png" alt="CC-BY-SA" class="pad"/></a><br/>
+			<a href="http://validator.w3.org/check/referer" title="XHTML 1.0 W3C Rec"><img src="xhtml10.png" alt="XHTML 1.0 W3C Rec" /></a><br/>
+			<a href="http://jigsaw.w3.org/css-validator/check/referer" title="CSS 2.1 W3C CanRec"><img src="css21.png" alt="CSS 2.1 W3C CanRec" /></a><br/>
+			<div class="pad">[<a href="mailto:vadim@grammarware.net">Complain!</a>]</div>
+		</div>
+		<div class="main">
+		''' % (','.join(self.getNames()), main.capitalize(), self.main)
 		if self.fig:
-			# [[https://github.com/SoTeSoLa/SoTeSoLa/raw/master/wg-community-resources/sotesola-wiki-graph/rel.png|frame|align=right|float|width=500px|alt=Relationships among working groups and hackathons]]
 			s += '<div class="fig"><a href="http://github.com/grammarware/sleg/blob/master/figures/%s"><img src="http://github.com/grammarware/slef/raw/master/figures/%s" alt="%s" title="%s"/></a><br/>(<a href="http://github.com/grammarware/sleg/blob/master/figures/%s.info.txt">info</a>)</div>' % (self.fig, self.fig, main, main, self.fig)
 		if self.defin:
-			s += '<li>%s</li>\n' % self.defin.getHtml()
+			s += '<div class="def">%s</div>\n' % self.defin.getHtml()
+		z = ''
 		for k in languages:
 			if k in self.items.keys():
 				# print('"%s" vs "%s"' % (str(self.items[k]) , main))
 				if self.items[k].title == main:
-					s += '<li>%s<strong>%s</strong>: %s</li>\n' % (self.getFlag(k), k, self.items[k].getHtml())
+					z += '<li>%s<strong>%s</strong>: %s</li>\n' % (self.getFlag(k), k, self.items[k].getHtml())
 				else:
-					s += '<li>%s<strong>%s</strong>: %s</li>\n' % (self.getFlag(k), k, self.items[k].getHtmlLinked())
+					z += '<li>%s<strong>%s</strong>: %s</li>\n' % (self.getFlag(k), k, self.items[k].getHtmlLinked())
+		if z:
+			s += '<h2>Translations</h2><ul>%s</ul>' % z
+		z = ''
 		for p in self.pubs:
-			s += '<li><strong>Publication:</strong> %s</li>\n' % p.getHtml()
-		return s+'</ul><hr/></body></html>'
+			z += '<li>%s</li>\n' % p.getHtml()
+		if z:
+			s += '<h2>Publications</h2><ul>%s</ul>' % z
+		# Last updated: %s.<br/>
+		return s+'''</div><br clear="both"/><hr />
+		<div class="last">
+			<em>
+				<a href="http://github.com/grammarware/sleg">Software Language Engineering Glossary</a> (SLEG) is
+				created and maintained by <a href="http://grammarware.net">Dr. Vadim Zaytsev</a>.
+			</em>
+		</div></body></html>'''
 	def getFlag(self, key):
 		f = flags[languages.index(key)]
 		if f:
