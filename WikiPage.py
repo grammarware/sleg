@@ -4,7 +4,7 @@ import sys
 
 languages = ('Abbreviated as', 'English', 'German', 'French', 'Dutch', 'Russian')
 flags =     (''              ,  'EN'    , 'DE'    , 'FR'    , 'NL'   , 'RU')
-code = ('**','[[')
+code = ('**','[[','`')
 
 class WikiPage:
 	def __init__(self, fname):
@@ -180,6 +180,10 @@ class MDText:
 				j = s.find(']]')
 				self.chunks.append(MDLink(s[2:j]))
 				s = s[j+2:]
+			elif s.startswith('`'):
+				j = s[1:].find('`')+1
+				self.chunks.append(MDCode(s[1:j]))
+				s = s[j+1:]
 			else:
 				seq = list(filter(lambda x:x!=-1,map(lambda x:s.find(x),code)))
 				if len(seq) < 1:
@@ -207,11 +211,25 @@ class MDBold:
 # bar not yet implemented
 class MDLink:
 	def __init__(self, s):
+		if s.find('|') < 0:
+			self.goal = self.text = s
+		else:
+			self.text,self.goal = s.split('|')
+	def getHtml(self):
+		return '<a href="%s.html">%s</a>' % (self.goal, self.text) # .capitalize()?
+	def __str__(self):
+		if self.goal == self.text:
+			return '[[%s]]' % self.text
+		else:
+			return '[[%s|%s]]' % (self.text,self.goal)
+
+class MDCode:
+	def __init__(self, s):
 		self.text = s
 	def getHtml(self):
-		return '<a href="%s.html">%s</a>' % (self.text, self.text) # .capitalize()?
+		return '<code>%s</code>' % self.text
 	def __str__(self):
-		return '[[%s]]' % self.text
+		return '`%s`' % self.text
 
 class MDBare:
 	def __init__(self, s):
