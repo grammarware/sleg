@@ -10,13 +10,18 @@ for root, dirs, filenames in os.walk('wiki/'):
 	for f in filter(lambda x:x.endswith('.md'),filenames):
 		if f in ('Home.md'):
 			continue
-		print(f)
+		print('--------------%s-------------' % f)
 		p = WikiPage.WikiPage('wiki/%s' % f)
-		p.validate()
+		# p.validate()
+		# q = open('newiki/%s' % f, 'w')
+		# q.write(str(p))
+		# q.close()
+		# 
 		for lang in p.getLanguages():
 			if lang not in names.keys():
 				names[lang] = []
-			for name in p.getNames(lang).getTitles():
+			print (lang,'-->',p.getNames(lang))
+			for name in p.getNames(lang):
 				if name not in names[lang]:
 					names[lang].append(name)
 				try:
@@ -47,7 +52,7 @@ f.write('''<?xml version="1.0" encoding="UTF-8"?>
 	<div>[<a href="mailto:vadim@grammarware.net">Complain!</a>]</div>
 </div>
 <div class="main">
-	<h1>SLEG is under construction!</h1>
+	<h1>SLEG is a work is progress!</h1>
 	<h2>Unordered list of all possible pages</h2>• ''')
 for l in WikiPage.languages:
 	if l in names:
@@ -59,7 +64,7 @@ for i in range(0,len(WikiPage.languages)):
 	if WikiPage.flags[i]:
 		s += '<img src="www/%s.png" alt="%s"/>' % (WikiPage.flags[i], WikiPage.languages[i])
 	s += '<a name="%s"/>%s</h3>\n<div class="mult">\n' % (WikiPage.languages[i], WikiPage.languages[i])
-	for name in sorted(names[WikiPage.languages[i]]):
+	for name in names[WikiPage.languages[i]]:
 		s += '<a href="%s.html">%s</a><br/>\n' % (name,name)
 	f.write(s+'</div>')
 f.write('''</div><div style="clear:both"/><hr />

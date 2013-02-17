@@ -2,41 +2,70 @@
 import os
 import sys
 
-languages = ('Short', 'English', 'German', 'French', 'Dutch', 'Russian')
-flags =     (''     ,  'EN'    , 'DE'    , 'FR'    , 'NL'   , 'RU')
+languages = ('English', 'German', 'French', 'Dutch', 'Russian')
+flags =     ('EN'     , 'DE'    , 'FR'    , 'NL'   , 'RU'     )
 code = ('**','[[','`')
+
+class Bunch:
+	def __init__(self, **kwds):
+		self.__dict__.update(kwds)
 
 class WikiPage:
 	def __init__(self, fname):
 		self.main = fname
-		self.items = {}
-		self.pubs = []
-		self.defin = None
-		self.fig = ''
+		self.sections = {}
+		# self.pubs = []
+		# self.defin = None
+		# self.fig = ''
 		f = open(fname,'r')
 		self.text = f.readlines()
 		f.close()
+		cur = ''
 		for line in self.text:
+			if line.startswith('## '):
+				cur = line[3:].strip()
+				# self.sections[cur] = Bunch(terms=[],fig='',defin='',links=[])
+				self.sections[cur] = Bunch(terms=[],pairs={})
+				continue
+			if not cur or not line.strip():
+				# skip lines before the first section
+				continue
+			if line[2]=='_':
+				# dangerous: assumes that all terms are surrounded by underscores!
+				# is s[1:-1] better?
+				self.sections[cur].terms = [s.split('_')[1] for s in line[2:].split('; ')]
+				continue
 			wrds = line.split(': ')
 			if len(wrds) == 2:
 				lhs = wrds[0].split('* ')[1]
 				rhs = wrds[1].strip()
-				if lhs in languages:
-					self.items[lhs] = Entry(rhs)
-				elif lhs == 'Publication':
-					self.pubs.append(Publication(rhs))
+				if rhs.startswith('_') and rhs.endswith('_'):
+					rhs = rhs[1:-1]
+				# if lhs in languages:
+				# 	self.items[lhs] = Entry(rhs)
+				if lhs == 'Publication':
+					e = Publication(rhs)
 				elif lhs == 'Definition':
-					self.defin = MDText(rhs)
-				elif lhs == 'Figure':
-					self.fig = rhs
+					e = MDText(rhs)
+				# elif lhs == 'Figure':
+				# 	self.fig = rhs
 				else:
-					print('Unknown line:',line)
+					# print('Unknown line:',line)
+					e = Entry(rhs)
+				if lhs in self.sections[cur].pairs.keys():
+					self.sections[cur].pairs[lhs].append(e)
+				else:
+					self.sections[cur].pairs[lhs] = [e]
 			elif line.strip():
 				print('Strange line:',line)
 	def who(self):
 		return self.__class__.__name__
 	def validate(self):
 		lines = list(filter(lambda x:x,map(lambda x:x.strip(),self.text)))
+		for line in lines:
+			print(line)
+		print('---vs---')
+		print(str(self))
 		for line in str(self).split('\n'):
 			if not line:
 				continue
@@ -47,15 +76,18 @@ class WikiPage:
 		for line in lines:
 			print(' * The original has unmatched line "%s"' % line)
 	def getLanguages(self):
-		return sorted(self.items.keys())
+		return sorted(self.sections.keys())
 	def getNames(self,lang):
-		return self.items[lang]
+		if 'Short' in self.sections[lang].pairs.keys(): # and not str(self.sections[lang].pairs['Short']).startswith('`'):
+			return self.sections[lang].terms + list(filter(lambda x:str(x).isalnum(),self.sections[lang].pairs['Short']))
+		else:
+			return self.sections[lang].terms
 	def getKeywords(self):
 		kws = []
-		for lang in self.items.keys():
+		for lang in self.sections.keys():
 			kws.append(lang)
 			# print(self.items[lang].getTitles())
-			kws.extend(self.items[lang].getTitles())
+			kws.extend(self.sections[lang].terms)
 		return kws
 	def getHtml(self, main):
 		s = '''<?xml version="1.0" encoding="UTF-8"?>
@@ -78,26 +110,56 @@ class WikiPage:
 			<div>[<a href="mailto:vadim@grammarware.net">Complain!</a>]</div>
 		</div>
 		<div class="main">
-		''' % (', '.join(self.getKeywords()), main, self.main.split('.md')[0].replace(' ','-'))
-		if self.fig:
-			s += '<div class="fig"><a href="http://github.com/grammarware/sleg/blob/master/figures/%s"><img src="http://github.com/grammarware/slef/raw/master/figures/%s" alt="%s" title="%s"/></a><br/>(<a href="http://github.com/grammarware/sleg/blob/master/figures/%s.info.txt">info</a>)</div>' % (self.fig, self.fig, main, main, self.fig)
-		if self.defin:
-			s += '<div class="def">%s</div>\n' % self.defin.getHtml()
-		z = ''
-		for k in languages:
-			if k in self.items.keys():
-				# print('"%s" vs "%s"' % (self.items[k].getTitle() , main))
-				if self.items[k].getTitle() == main:
-					z += '<li>%s<strong>%s</strong>: %s</li>\n' % (self.getFlag(k), k, self.items[k].getHtml())
+		''' % ('; '.join(self.getKeywords()), main, self.main.split('.md')[0].replace(' ','-'))
+		for lang in languages:
+			if lang not in self.sections.keys():
+				continue
+			# main loop
+			# TODO: do not hyperlink self-references
+			s += '<h2>%s</h2>\n<ul><li>' % Flagged(lang)
+			# s += '<ul><li>%s</li>\n' % '; '.join(['<strong>%s</strong>' % s for s in self.sections[lang].terms])
+			ts = []
+			for t in self.sections[lang].terms:
+				if t == main:
+					ts.append('<strong>%s</strong>' % t)
 				else:
-					z += '<li>%s<strong>%s</strong>: %s</li>\n' % (self.getFlag(k), k, self.items[k].getHtmlLinked())
-		if z:
-			s += '<h2>Translations</h2><ul>%s</ul>' % z
-		z = ''
-		for p in self.pubs:
-			z += '<li>%s</li>\n' % p.getHtml()
-		if z:
-			s += '<h2>Publications</h2><ul>%s</ul>' % z
+					ts.append('<a href="%s.html"><strong>%s</strong></a>' % (t,t))
+			s += '; '.join(ts)
+			if 'Short' in self.sections[lang].pairs.keys():
+				z = []
+				for short in self.sections[lang].pairs['Short']:
+					if short == main or not short.text.isalnum():
+						z.append('%s' % short.getHtml())
+					else:
+						z.append('<a href="%s.html">%s</a>' % (short,short.getHtml()))
+				s += ' (%s)' % '; '.join(z)
+			s += '</li>\n'
+			for k in self.sections[lang].pairs.keys():
+				for rhs in self.sections[lang].pairs[k]:
+					if k == 'Short':
+						continue
+					elif k == 'Figure':
+						s += '<div class="fig"><a href="http://github.com/grammarware/sleg/blob/master/figures/%s"><img src="http://github.com/grammarware/sleg/raw/master/figures/%s" alt="%s" title="%s"/></a><br/>(<a href="http://github.com/grammarware/sleg/blob/master/figures/%s.info.txt">info</a>)</div>' % (rhs, rhs, main, main, rhs)
+					elif k == 'Definition':
+						s += '<li class="def">%s</li>\n' % rhs.getHtml()
+					else:
+						s += '<li>%s: %s</li>' % (k,rhs.getHtml())
+			s += '</ul>'
+		# z = ''
+		# for k in languages:
+		# 	if k in self.items.keys():
+		# 		# print('"%s" vs "%s"' % (self.items[k].getTitle() , main))
+		# 		if self.items[k].getTitle() == main:
+		# 			z += '<li>%s<strong>%s</strong>: %s</li>\n' % (self.getFlag(k), k, self.items[k].getHtml())
+		# 		else:
+		# 			z += '<li>%s<strong>%s</strong>: %s</li>\n' % (self.getFlag(k), k, self.items[k].getHtmlLinked())
+		# if z:
+		# 	s += '<h2>Translations</h2><ul>%s</ul>' % z
+		# z = ''
+		# for p in self.pubs:
+		# 	z += '<li>%s</li>\n' % p.getHtml()
+		# if z:
+		# 	s += '<h2>Publications</h2><ul>%s</ul>' % z
 		# Last updated: %s.<br/>
 		return s+'''</div><div style="clear:both"/><hr />
 		<div class="last">
@@ -114,6 +176,13 @@ class WikiPage:
 			return ''
 	def __str__(self):
 		s = ''
+		for lang in languages:
+			if lang not in self.sections.keys():
+				continue
+			s += '\n## %s\n* %s\n' % (lang,'; '.join(['_%s_' % s for s in self.sections[lang].terms]))
+			for k in self.sections[lang].pairs:
+				s += '* %s: %s\n' % (k, self.sections[lang].pairs[k])
+		return s.strip()+'\n'
 		if self.fig:
 			s += '* Figure: %s\n' % self.fig
 		if self.defin:
@@ -123,7 +192,7 @@ class WikiPage:
 				s += '* %s: %s\n' % (k, self.items[k])
 		for p in self.pubs:
 			s += '* Publication: %s\n' % p
-		return s
+		return s.strip()
 
 # Publication: [*Generalized multitext grammars*](http://dx.doi.org/10.3115/1218955.1219039)
 class Publication:
@@ -141,39 +210,21 @@ class Publication:
 	def __str__(self):
 		return '[*%s*](%s)' % (self.title, self.link)
 
-# English: _algebraic data type_ ([Wikipedia](http://en.wikipedia.org/wiki/Algebraic data type))
+# English: Wikipedia: http://en.wikipedia.org/wiki/Algebraic_data_type
 class Entry:
 	def __init__(self, s):
-		self.titles = []
-		for t in s.split(' or '):
-			self.titles.append(t.split('_')[1])
-		self.links = []
-		# Lng: _title_ ([W1](http://link)) ([W2](http://link))
-		for link in s.split(' ([')[1:]:
-			# W1](http://link))
-			a,b = link.split('](')
-			b = b[:-2]
-			self.links.append((a,b))
+		self.text = s
 	def who(self):
 		return self.__class__.__name__
-	def getTitle(self):
-		# ???
-		return '/'.join(self.titles)
-	def getTitles(self):
-		return self.titles
 	def getHtml(self):
-		return self.getHtmlLinks(' or '.join(['<em>%s</em>' % t for t in self.titles]))
-	def getHtmlLinked(self):
-		return self.getHtmlLinks(' or '.join(['<em><a href="%s.html">%s</a></em>' % (t,t) for t in self.titles])) # .capitalize()?
-	def getHtmlLinks(self, s):
-		for link in self.links:
-			s += ' (<a href="%s">%s</a>)' % (link[1], link[0])
-		return s
+		if self.text.startswith('http://'):
+			return '<a class="src" href="%s">%s</a>' % (self.text,self.text)
+		elif self.text.startswith('`'):
+			return '<code>%s</code>' % self.text.split('`')[1]
+		else:
+			return '%s' % self.text
 	def __str__(self):
-		s = ' or '.join(['_%s_' % t for t in self.titles])
-		for link in self.links:
-			s += ' ([%s](%s))' % link
-		return s
+		return self.text
 
 class MDText:
 	def __init__(self, s):
@@ -245,3 +296,10 @@ class MDBare:
 		return self.text
 	def __str__(self):
 		return self.text
+
+class Flagged:
+	def __init__(self, lang):
+		self.lang = lang
+		self.flag = flags[languages.index(self.lang)]
+	def __str__(self):
+		return '<img src="www/%s.png" alt="%s"/> %s' % (self.flag, self.lang, self.lang)
