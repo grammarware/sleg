@@ -2,8 +2,8 @@
 import os
 import sys
 
-languages = ('Abbreviated as', 'English', 'German', 'French', 'Dutch', 'Russian')
-flags =     (''              ,  'EN'    , 'DE'    , 'FR'    , 'NL'   , 'RU')
+languages = ('Short', 'English', 'German', 'French', 'Dutch', 'Russian')
+flags =     (''     ,  'EN'    , 'DE'    , 'FR'    , 'NL'   , 'RU')
 code = ('**','[[','`')
 
 class WikiPage:
@@ -46,11 +46,17 @@ class WikiPage:
 				print(' * The original is expected to have line "%s"' % line)
 		for line in lines:
 			print(' * The original has unmatched line "%s"' % line)
-	def getNames(self):
-		names = []
-		for k in self.items.keys():
-			names.extend(self.items[k].getTitles())
-		return names
+	def getLanguages(self):
+		return sorted(self.items.keys())
+	def getNames(self,lang):
+		return self.items[lang]
+	def getKeywords(self):
+		kws = []
+		for lang in self.items.keys():
+			kws.append(lang)
+			# print(self.items[lang].getTitles())
+			kws.extend(self.items[lang].getTitles())
+		return kws
 	def getHtml(self, main):
 		s = '''<?xml version="1.0" encoding="UTF-8"?>
 		<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
@@ -72,7 +78,7 @@ class WikiPage:
 			<div>[<a href="mailto:vadim@grammarware.net">Complain!</a>]</div>
 		</div>
 		<div class="main">
-		''' % (', '.join(self.getNames()), main, self.main.split('.md')[0].replace(' ','-'))
+		''' % (', '.join(self.getKeywords()), main, self.main.split('.md')[0].replace(' ','-'))
 		if self.fig:
 			s += '<div class="fig"><a href="http://github.com/grammarware/sleg/blob/master/figures/%s"><img src="http://github.com/grammarware/slef/raw/master/figures/%s" alt="%s" title="%s"/></a><br/>(<a href="http://github.com/grammarware/sleg/blob/master/figures/%s.info.txt">info</a>)</div>' % (self.fig, self.fig, main, main, self.fig)
 		if self.defin:
@@ -80,8 +86,8 @@ class WikiPage:
 		z = ''
 		for k in languages:
 			if k in self.items.keys():
-				# print('"%s" vs "%s"' % (str(self.items[k]) , main))
-				if self.items[k].title == main:
+				# print('"%s" vs "%s"' % (self.items[k].getTitle() , main))
+				if self.items[k].getTitle() == main:
 					z += '<li>%s<strong>%s</strong>: %s</li>\n' % (self.getFlag(k), k, self.items[k].getHtml())
 				else:
 					z += '<li>%s<strong>%s</strong>: %s</li>\n' % (self.getFlag(k), k, self.items[k].getHtmlLinked())
@@ -138,7 +144,9 @@ class Publication:
 # English: _algebraic data type_ ([Wikipedia](http://en.wikipedia.org/wiki/Algebraic data type))
 class Entry:
 	def __init__(self, s):
-		self.title = s.split('_')[1]
+		self.titles = []
+		for t in s.split(' or '):
+			self.titles.append(t.split('_')[1])
 		self.links = []
 		# Lng: _title_ ([W1](http://link)) ([W2](http://link))
 		for link in s.split(' ([')[1:]:
@@ -149,22 +157,20 @@ class Entry:
 	def who(self):
 		return self.__class__.__name__
 	def getTitle(self):
-		return self.title
+		# ???
+		return '/'.join(self.titles)
 	def getTitles(self):
-		if self.title.find('/') < 0:
-			return [self.title]
-		else:
-			return self.title.split('/')
+		return self.titles
 	def getHtml(self):
-		return self.getHtmlLinks('<em>%s</em>' % self.title)
+		return self.getHtmlLinks(' or '.join(['<em>%s</em>' % t for t in self.titles]))
+	def getHtmlLinked(self):
+		return self.getHtmlLinks(' or '.join(['<em><a href="%s.html">%s</a></em>' % (t,t) for t in self.titles])) # .capitalize()?
 	def getHtmlLinks(self, s):
 		for link in self.links:
 			s += ' (<a href="%s">%s</a>)' % (link[1], link[0])
 		return s
-	def getHtmlLinked(self):
-		return self.getHtmlLinks('<em><a href="%s.html">%s</a></em>' % (self.title, self.title)) # .capitalize()?
 	def __str__(self):
-		s = '_%s_' % self.title
+		s = ' or '.join(['_%s_' % t for t in self.titles])
 		for link in self.links:
 			s += ' ([%s](%s))' % link
 		return s

@@ -4,7 +4,7 @@
 import os
 import WikiPage
 
-names = []
+names = {}
 
 for root, dirs, filenames in os.walk('wiki/'):
 	for f in filter(lambda x:x.endswith('.md'),filenames):
@@ -13,16 +13,18 @@ for root, dirs, filenames in os.walk('wiki/'):
 		print(f)
 		p = WikiPage.WikiPage('wiki/%s' % f)
 		p.validate()
-		for name in p.getNames():
-			try:
-				f = open('up/%s.html' % name,'w')
-				f.write(p.getHtml(name))
-				for name in p.getNames():
-					if name not in names:
-						names.append(name)
-				f.close()
-			except IOError:
-				print('"%s" cannot be accessed' % name)
+		for lang in p.getLanguages():
+			if lang not in names.keys():
+				names[lang] = []
+			for name in p.getNames(lang).getTitles():
+				if name not in names[lang]:
+					names[lang].append(name)
+				try:
+					f = open('up/%s.html' % name,'w')
+					f.write(p.getHtml(name))
+					f.close()
+				except IOError:
+					print(' !!! "%s" cannot be accessed' % name)
 
 #
 f = open('up/index.html','w')
@@ -46,10 +48,21 @@ f.write('''<?xml version="1.0" encoding="UTF-8"?>
 </div>
 <div class="main">
 	<h1>SLEG is under construction!</h1>
-	<h2>Unordered list of all possible pages</h2><div class="mult">''')
-for name in sorted(names):
-	f.write('<a href="%s.html">%s</a><br/>\n' % (name,name))
-f.write('''</div></div><div style="clear:both"/><hr />
+	<h2>Unordered list of all possible pages</h2>• ''')
+for l in WikiPage.languages:
+	if l in names:
+		f.write('<a href="#%s">%s<a> • ' % (l,l))
+for i in range(0,len(WikiPage.languages)):
+	if WikiPage.languages[i] not in names:
+		continue
+	s = '<hr/><h3>'
+	if WikiPage.flags[i]:
+		s += '<img src="www/%s.png" alt="%s"/>' % (WikiPage.flags[i], WikiPage.languages[i])
+	s += '<a name="%s"/>%s</h3>\n<div class="mult">\n' % (WikiPage.languages[i], WikiPage.languages[i])
+	for name in sorted(names[WikiPage.languages[i]]):
+		s += '<a href="%s.html">%s</a><br/>\n' % (name,name)
+	f.write(s+'</div>')
+f.write('''</div><div style="clear:both"/><hr />
 	<div class="last">
 		<em>
 			<a href="http://github.com/grammarware/sleg">Software Language Engineering Glossary</a> (SLEG) is
