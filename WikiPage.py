@@ -52,18 +52,19 @@ class WikiPage:
 			names.extend(self.items[k].getTitles())
 		return names
 	def getHtml(self, main):
-		s = '''<!DOCTYPE html PUBLIC "-//W3C//Dth XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/Dth/xhtml1-strict.dth">
+		s = '''<?xml version="1.0" encoding="UTF-8"?>
+		<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
 		<html xmlns="http://www.w3.org/1999/xhtml" xmlns:xhtml="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
 		<head>
 			<meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
-			<meta name="keywords" content="software language engineering,book of knowledge,glossary,%s"/>
-			<title>S(L)EBOK — SLEG — %s</title>
+			<meta name="keywords" content="software linguistics, software language engineering, book of knowledge, glossary, %s"/>
+			<title>SL(E)BOK — SLEG — %s</title>
 			<link href="www/sleg.css" rel="stylesheet" type="text/css"/>
 		</head>
 		<body>
 		<div class="left">
-			<a href="/"><img src="www/sleg.200.png" alt="Software Language Engineering Glossary (SLEG)" class="pad"/></a><br/>
-			<div class="pad">[<a href="http://github.com/grammarware/sleg/wiki/%s">Edit!</a>]</div><br/>
+			<a href="index.html"><img src="www/sleg.200.png" alt="Software Language Engineering Glossary (SLEG)" class="pad"/></a><br/>
+			<div class="pad">[<a href="http://github.com/grammarware/sleg/%s/_edit">Edit!</a>]</div><br/>
 			<a href="http://creativecommons.org/licenses/by-sa/3.0/" title="CC-BY-SA"><img src="www/cc-by-sa.png" alt="CC-BY-SA"/></a><br/>
 			<a href="http://creativecommons.org/licenses/by-sa/3.0/" title="Open Knowledge"><img src="www/open-knowledge.png" alt="Open Knowledge" class="pad" /></a><br/>
 			<a href="http://validator.w3.org/check/referer" title="XHTML 1.0 W3C Rec"><img src="www/xhtml10.png" alt="XHTML 1.0 W3C Rec" /></a><br/>
@@ -71,7 +72,7 @@ class WikiPage:
 			<div>[<a href="mailto:vadim@grammarware.net">Complain!</a>]</div>
 		</div>
 		<div class="main">
-		''' % (','.join(self.getNames()), main.capitalize(), self.main)
+		''' % (', '.join(self.getNames()), main, self.main.split('.md')[0].replace(' ','-'))
 		if self.fig:
 			s += '<div class="fig"><a href="http://github.com/grammarware/sleg/blob/master/figures/%s"><img src="http://github.com/grammarware/slef/raw/master/figures/%s" alt="%s" title="%s"/></a><br/>(<a href="http://github.com/grammarware/sleg/blob/master/figures/%s.info.txt">info</a>)</div>' % (self.fig, self.fig, main, main, self.fig)
 		if self.defin:
@@ -92,7 +93,7 @@ class WikiPage:
 		if z:
 			s += '<h2>Publications</h2><ul>%s</ul>' % z
 		# Last updated: %s.<br/>
-		return s+'''</div><br clear="both"/><hr />
+		return s+'''</div><div style="clear:both"/><hr />
 		<div class="last">
 			<em>
 				<a href="http://github.com/grammarware/sleg">Software Language Engineering Glossary</a> (SLEG) is
