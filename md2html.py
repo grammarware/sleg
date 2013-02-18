@@ -12,7 +12,7 @@ for root, dirs, filenames in os.walk('wiki/'):
 			continue
 		print('--------------%s-------------' % f)
 		p = WikiPage.WikiPage('wiki/%s' % f)
-		# p.validate()
+		p.validate()
 		# q = open('newiki/%s' % f, 'w')
 		# q.write(str(p))
 		# q.close()
@@ -20,7 +20,6 @@ for root, dirs, filenames in os.walk('wiki/'):
 		for lang in p.getLanguages():
 			if lang not in names.keys():
 				names[lang] = []
-			print (lang,'-->',p.getNames(lang))
 			for name in p.getNames(lang):
 				if name not in names[lang]:
 					names[lang].append(name)
