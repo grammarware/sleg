@@ -37,9 +37,9 @@ class WikiPage:
 					self.addValue(cur,'Terms',z)
 				continue
 			wrds = line.split(': ')
-			if len(wrds) == 2:
+			if len(wrds) > 1:
 				lhs = wrds[0].split('* ')[1]
-				rhs = wrds[1].strip()
+				rhs = ': '.join(wrds[1:]).strip()
 				# TODO: decide whether this is a temporary fix or a robustness invariant
 				if rhs.startswith('_') and rhs.endswith('_'):
 					rhs = rhs[1:-1]
