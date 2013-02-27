@@ -7,6 +7,7 @@ git add -A
 git commit -F ../commit.msg
 cd ..
 ./md2html.py
+./genHome.py
 cd up
 git add -A
 git commit -F ../commit.msg
