@@ -100,16 +100,16 @@ class WikiPage:
 			<meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
 			<meta name="keywords" content="software linguistics, software language engineering, book of knowledge, glossary, %s"/>
 			<title>SL(E)BOK — SLEG — %s</title>
-			<link href="www/sleg.css" rel="stylesheet" type="text/css"/>
+			<link href="../www/sleg.css" rel="stylesheet" type="text/css"/>
 		</head>
 		<body>
 		<div class="left">
-			<a href="index.html"><img src="www/sleg.200.png" alt="Software Language Engineering Glossary (SLEG)" class="pad"/></a><br/>
-			<div class="pad">[<a href="http://github.com/grammarware/sleg/%s/_edit">Edit!</a>]</div><br/>
-			<a href="http://creativecommons.org/licenses/by-sa/3.0/" title="CC-BY-SA"><img src="www/cc-by-sa.png" alt="CC-BY-SA"/></a><br/>
-			<a href="http://creativecommons.org/licenses/by-sa/3.0/" title="Open Knowledge"><img src="www/open-knowledge.png" alt="Open Knowledge" class="pad" /></a><br/>
-			<a href="http://validator.w3.org/check/referer" title="XHTML 1.0 W3C Rec"><img src="www/xhtml10.png" alt="XHTML 1.0 W3C Rec" /></a><br/>
-			<a href="http://jigsaw.w3.org/css-validator/check/referer" title="CSS 2.1 W3C CanRec"><img src="www/css21.png" alt="CSS 2.1 W3C CanRec" class="pad" /></a><br/>
+			<a href="index.html"><img src="../www/sleg.200.png" alt="Software Language Engineering Glossary (SLEG)" class="pad"/></a><br/>
+			<div class="pad">[<a href="http://github.com/slebok/sleg/%s/_edit">Edit!</a>]</div><br/>
+			<a href="http://creativecommons.org/licenses/by-sa/3.0/" title="CC-BY-SA"><img src="../www/cc-by-sa.png" alt="CC-BY-SA"/></a><br/>
+			<a href="http://creativecommons.org/licenses/by-sa/3.0/" title="Open Knowledge"><img src="../www/open-knowledge.png" alt="Open Knowledge" class="pad" /></a><br/>
+			<a href="http://validator.w3.org/check/referer" title="XHTML 1.0 W3C Rec"><img src="../www/xhtml10.png" alt="XHTML 1.0 W3C Rec" /></a><br/>
+			<a href="http://jigsaw.w3.org/css-validator/check/referer" title="CSS 2.1 W3C CanRec"><img src="../www/css21.png" alt="CSS 2.1 W3C CanRec" class="pad" /></a><br/>
 			<div>[<a href="mailto:vadim@grammarware.net">Complain!</a>]</div>
 		</div>
 		<div class="main">
@@ -143,7 +143,7 @@ class WikiPage:
 					if k == 'Short' or k == 'Terms':
 						continue
 					elif k == 'Figure':
-						s += '<div class="fig"><a href="http://github.com/grammarware/sleg/blob/master/figures/%s"><img src="http://github.com/grammarware/sleg/raw/master/figures/%s" alt="%s" title="%s"/></a><br/>(<a href="http://github.com/grammarware/sleg/blob/master/figures/%s.info.txt">info</a>)</div>' % (rhs, rhs, main, main, rhs)
+						s += '<div class="fig"><a href="http://github.com/slebok/sleg/blob/master/figures/%s"><img src="http://github.com/slebok/sleg/raw/master/figures/%s" alt="%s" title="%s"/></a><br/>(<a href="http://github.com/slebok/sleg/blob/master/figures/%s.info.txt">info</a>)</div>' % (rhs, rhs, main, main, rhs)
 					elif k == 'Definition':
 						s += '<li class="def">%s</li>\n' % rhs.getHtml()
 					else:
@@ -153,7 +153,7 @@ class WikiPage:
 		return s+'''</div><div style="clear:both"/><hr />
 		<div class="last">
 			<em>
-				<a href="http://github.com/grammarware/sleg">Software Language Engineering Glossary</a> (SLEG) is
+				<a href="http://github.com/slebok/sleg">Software Language Engineering Glossary</a> (SLEG) is
 				created and maintained by <a href="http://grammarware.net">Dr. Vadim Zaytsev</a>.
 			</em>
 		</div></body></html>'''
@@ -286,4 +286,4 @@ class Flagged:
 		self.lang = lang
 		self.flag = flags[languages.index(self.lang)]
 	def __str__(self):
-		return '<img src="www/%s.png" alt="%s"/> %s' % (self.flag, self.lang, self.lang)
+		return '<img src="../www/%s.png" alt="%s"/> %s' % (self.flag, self.lang, self.lang)
