@@ -1,4 +1,4 @@
-#!/Library/Frameworks/Python.framework/Versions/3.1/bin/python3
+#!/usr/local/bin/python3
 # -*- coding: utf-8 -*-
 
 import os
@@ -6,12 +6,12 @@ import WikiPage
 
 names = {}
 
-for root, dirs, filenames in os.walk('wiki/'):
+for root, dirs, filenames in os.walk('../slegwiki/'):
 	for f in filter(lambda x:x.endswith('.md'),filenames):
 		if f in ('Home.md'):
 			continue
 		print('--------------%s-------------' % f)
-		p = WikiPage.WikiPage('wiki/%s' % f)
+		p = WikiPage.WikiPage('../slegwiki/%s' % f)
 		p.validate()
 		# q = open('newiki/%s' % f, 'w')
 		# q.write(str(p))
@@ -24,14 +24,14 @@ for root, dirs, filenames in os.walk('wiki/'):
 				if name not in names[lang]:
 					names[lang].append(name)
 				try:
-					f = open('up/sleg/%s.html' % name,'w')
-					f.write(p.getHtml(name))
+					f = open('../slebok/sleg/%s.html' % name,'w')
+					f.write(p.getHtml(name).replace('../slegwiki/','wiki/'))
 					f.close()
 				except IOError:
 					print(' !!! "%s" cannot be accessed' % name)
 
 #
-f = open('up/sleg/index.html','w')
+f = open('../slebok/sleg/index.html','w')
 f.write('''<?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml" xmlns:xhtml="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
@@ -70,7 +70,8 @@ f.write('''</div><div style="clear:both"/><hr />
 	<div class="last">
 		<em>
 			<a href="http://github.com/grammarware/sleg">Software Language Engineering Glossary</a> (SLEG) is
-			created and maintained by <a href="http://grammarware.net">Dr. Vadim Zaytsev</a>.
+			created and maintained by <a href="http://grammarware.net">Dr. Vadim Zaytsev</a>.<br/>
+			Hosted as a part of <a href="http://slebok.github.io/">SLEBOK</a> on <a href="http://www.github.com/">GitHub</a>.
 		</em>
 	</div></body></html>''')
 f.close()

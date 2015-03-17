@@ -1,6 +1,0 @@
-[submodule "wiki"]
-	path = wiki
-	url = git@github.com:grammarware/sleg.wiki.git
-[submodule "up"]
-	path = up
-	url = git@github.com:slebok/slebok.github.com.git

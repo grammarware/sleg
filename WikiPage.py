@@ -1,4 +1,4 @@
-#!/Library/Frameworks/Python.framework/Versions/3.1/bin/python3
+#!/usr/local/bin/python3
 import os
 import sys
 
@@ -88,7 +88,7 @@ class WikiPage:
 		return self.getValues(lang,'Terms') + self.getValues(lang,'Short')
 	def getKeywords(self):
 		kws = []
-		for lang in self.orders:
+		for lang in sorted(self.orders.keys()):
 			kws.append(lang)
 			kws.extend(self.getValues(lang,'Terms'))
 		return kws
@@ -154,7 +154,8 @@ class WikiPage:
 		<div class="last">
 			<em>
 				<a href="http://github.com/slebok/sleg">Software Language Engineering Glossary</a> (SLEG) is
-				created and maintained by <a href="http://grammarware.net">Dr. Vadim Zaytsev</a>.
+				created and maintained by <a href="http://grammarware.net">Dr. Vadim Zaytsev</a>.<br/>
+				Hosted as a part of <a href="http://slebok.github.io/">SLEBOK</a> on <a href="http://www.github.com/">GitHub</a>.
 			</em>
 		</div></body></html>'''
 	def __str__(self):
