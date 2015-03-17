@@ -51,11 +51,11 @@ f.write('''<?xml version="1.0" encoding="UTF-8"?>
 	<div>[<a href="mailto:vadim@grammarware.net">Complain!</a>]</div>
 </div>
 <div class="main">
-	<h1>SLEG is a work is progress!</h1>
+	<h1>SLEG is a work in progress!</h1>
 	<h2>Unordered list of all possible pages</h2>• ''')
 for l in WikiPage.languages:
 	if l in names:
-		f.write('<a href="#%s">%s<a> • ' % (l,l))
+		f.write('<a href="#%s">%s</a> • ' % (l,l))
 for i in range(0,len(WikiPage.languages)):
 	if WikiPage.languages[i] not in names:
 		continue
