@@ -38,16 +38,16 @@ f.write('''<?xml version="1.0" encoding="UTF-8"?>
 <head>
 	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
 	<meta name="keywords" content="software linguistics, software language engineering, book of knowledge, glossary"/>
-	<title>SL(E)BOK — SLEG</title>
+	<title>SLEBOK — SLEG</title>
 	<link href="../www/sleg.css" rel="stylesheet" type="text/css"/>
 </head>
 <body>
 <div class="left">
 	<a href="index.html"><img src="../www/sleg.200.png" alt="Software Language Engineering Glossary (SLEG)" class="pad"/></a><br/>
-	<a href="http://creativecommons.org/licenses/by-sa/3.0/" title="CC-BY-SA"><img src="../www/cc-by-sa.png" alt="CC-BY-SA"/></a><br/>
-	<a href="http://creativecommons.org/licenses/by-sa/3.0/" title="Open Knowledge"><img src="../www/open-knowledge.png" alt="Open Knowledge" class="pad" /></a><br/>
-	<a href="http://validator.w3.org/check/referer" title="XHTML 1.0 W3C Rec"><img src="../www/xhtml10.png" alt="XHTML 1.0 W3C Rec" /></a><br/>
-	<a href="http://jigsaw.w3.org/css-validator/check/referer" title="CSS 2.1 W3C CanRec"><img src="../www/css21.png" alt="CSS 2.1 W3C CanRec" class="pad" /></a><br/>
+	<a href="http://creativecommons.org/licenses/by-sa/4.0/" title="CC-BY-SA"><img src="../www/cc-by-sa.png" alt="CC-BY-SA"/></a><br/>
+	<a href="http://creativecommons.org/licenses/by-sa/4.0/" title="Open Knowledge"><img src="../www/open-knowledge.png" alt="Open Knowledge" class="pad" /></a><br/>
+	<a href="http://validator.w3.org/check/referer" title="XHTML 1.0 W3C Rec"><img src="../www/xhtml.88.png" alt="XHTML 1.0 W3C Rec" /></a><br/>
+	<a href="http://jigsaw.w3.org/css-validator/check/referer" title="CSS 2.1 W3C CanRec"><img src="../www/css.88.png" alt="CSS 2.1 W3C CanRec" class="pad" /></a><br/>
 	<div>[<a href="mailto:vadim@grammarware.net">Complain!</a>]</div>
 </div>
 <div class="main">
@@ -63,7 +63,7 @@ for i in range(0,len(WikiPage.languages)):
 	if WikiPage.flags[i]:
 		s += '<img src="../www/%s.png" alt="%s"/>' % (WikiPage.flags[i], WikiPage.languages[i])
 	s += '<a name="%s"/>%s</h3>\n<div class="mult">\n' % (WikiPage.languages[i], WikiPage.languages[i])
-	for name in names[WikiPage.languages[i]]:
+	for name in sorted(names[WikiPage.languages[i]]):
 		s += '<a href="%s.html">%s</a><br/>\n' % (name,name)
 	f.write(s+'</div>')
 f.write('''</div><div style="clear:both"/><hr />
