@@ -15,7 +15,6 @@ for root, dirs, filenames in os.walk('../slegwiki/'):
 		# q = open('newiki/%s' % f, 'w')
 		# q.write(str(p))
 		# q.close()
-		# 
 		for lang in p.getLanguages():
 			if lang not in names.keys():
 				names[lang] = []

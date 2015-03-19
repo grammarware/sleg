@@ -94,7 +94,9 @@ class WikiPage:
 			kws.extend(self.getValues(lang, 'Terms'))
 		return kws
 	def getHtml(self, main):
-		s = TEMPLATES['pagehead'].format('; '.join(self.getKeywords()), main, self.main.split('.md')[0].replace(' ', '-'))
+		s = TEMPLATES['pagehead'].format('; '.join(self.getKeywords()),\
+			main,\
+			self.main.split('.md')[0].replace(' ', '-'))
 		for lang in languages:
 			if lang not in self.sections.keys():
 				continue
@@ -106,9 +108,9 @@ class WikiPage:
 			# for t in self.sections[lang].terms:
 			for t in self.getValues(lang, 'Terms'):
 				if t == main:
-					ts.append('<strong>%s</strong>' % t)
+					ts.append('<strong>{}</strong>'.format(t))
 				else:
-					ts.append('<a href="%s.html"><strong>%s</strong></a>' % (t, t))
+					ts.append(TEMPLATES['bilink'].format(t))
 			s += '; '.join(ts)
 			if 'Short' in self.getKeys(lang):
 				z = []
@@ -116,7 +118,7 @@ class WikiPage:
 					if short == main or not short.text.isalnum():
 						z.append(short.getHtml())
 					else:
-						z.append('<a href="%s.html">%s</a>' % (short, short.getHtml()))
+						z.append(TEMPLATES['ilink'].format(short, short.getHtml()))
 				s += ' (%s)' % '; '.join(z)
 			s += '</li>\n'
 			for k in self.getKeys(lang):
@@ -142,16 +144,6 @@ class WikiPage:
 				for v in self.getValues(lang, k):
 					s += '* %s: %s\n' % (k, v)
 		return s.strip()+'\n'
-		if self.fig:
-			s += '* Figure: %s\n' % self.fig
-		if self.defin:
-			s += '* Definition: %s\n' % self.defin
-		for k in languages:
-			if k in self.items.keys():
-				s += '* %s: %s\n' % (k, self.items[k])
-		for p in self.pubs:
-			s += '* Publication: %s\n' % p
-		return s.strip()
 
 # Publication: [*Generalized multitext grammars*](http://dx.doi.org/10.3115/1218955.1219039)
 class Publication:
@@ -165,7 +157,7 @@ class Publication:
 	def who(self):
 		return self.__class__.__name__
 	def getHtml(self):
-		return '<em><a href="%s">%s</a></em>' % (self.link, self.title)
+		return TEMPLATES['pub'].format(self.link, self.title)
 	def __str__(self):
 		return '[*%s*](%s)' % (self.title, self.link)
 
@@ -177,11 +169,11 @@ class Entry:
 		return self.__class__.__name__
 	def getHtml(self):
 		if self.text.startswith('http://'):
-			return '<a class="src" href="%s">%s</a>' % (self.text, self.text)
+			return TEMPLATES['entry'].format(self.text)
 		elif self.text.startswith('`'):
-			return '<code>%s</code>' % self.text.split('`')[1]
+			return TEMPLATES['code'].format(self.text.split('`')[1])
 		else:
-			return '%s' % self.text
+			return self.text
 	def __str__(self):
 		return self.text
 	def __lt__(self, other):
