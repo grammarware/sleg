@@ -20,12 +20,12 @@ def safelyLoadURL(url):
 	print 'Error fetching URL:',url
 	return ''
 
-for root, dirs, filenames in os.walk('wiki/'):
+for root, dirs, filenames in os.walk('../slegwiki/'):
 	for f in filter(lambda x:x.endswith('.md'),filenames):
 		if f == 'Home.md':
 			continue
 		print f
-		md = open('wiki/%s' % f, 'r')
+		md = open('../slegwiki/%s' % f, 'r')
 		topic = ''
 		links = []
 		for line in md.readlines():

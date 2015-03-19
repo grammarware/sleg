@@ -7,9 +7,7 @@ import WikiPage
 names = {}
 
 for root, dirs, filenames in os.walk('../slegwiki/'):
-	for f in filter(lambda x:x.endswith('.md'),filenames):
-		if f in ('Home.md'):
-			continue
+	for f in [x for x in filenames if x.endswith('.md') and x != 'Home.md']:
 		print('--------------%s-------------' % f)
 		p = WikiPage.WikiPage('../slegwiki/%s' % f)
 		p.validate()
@@ -24,14 +22,14 @@ for root, dirs, filenames in os.walk('../slegwiki/'):
 				if name not in names[lang]:
 					names[lang].append(name)
 				try:
-					f = open('../slebok/sleg/%s.html' % name,'w')
-					f.write(p.getHtml(name).replace('../slegwiki/','wiki/'))
+					f = open('../slebok/sleg/%s.html' % name, 'w', encoding="utf-8")
+					f.write(p.getHtml(name).replace('../slegwiki/', 'wiki/'))
 					f.close()
 				except IOError:
 					print(' !!! "%s" cannot be accessed' % name)
 
 #
-f = open('../slebok/sleg/index.html','w')
+f = open('../slebok/sleg/index.html', 'w', encoding="utf-8")
 f.write('''<?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml" xmlns:xhtml="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
@@ -55,16 +53,16 @@ f.write('''<?xml version="1.0" encoding="UTF-8"?>
 	<h2>Unordered list of all possible pages</h2>• ''')
 for l in WikiPage.languages:
 	if l in names:
-		f.write('<a href="#%s">%s</a> • ' % (l,l))
-for i in range(0,len(WikiPage.languages)):
+		f.write('<a href="#%s">%s</a> • ' % (l, l))
+for i in range(len(WikiPage.languages)):
 	if WikiPage.languages[i] not in names:
 		continue
 	s = '<hr/><h3>'
 	if WikiPage.flags[i]:
 		s += '<img src="../www/%s.png" alt="%s"/>' % (WikiPage.flags[i], WikiPage.languages[i])
-	s += '<a name="%s"/>%s</h3>\n<div class="mult">\n' % (WikiPage.languages[i], WikiPage.languages[i])
+	s += '<a name="{0}"/>{0}</h3>\n<div class="mult">\n'.format(WikiPage.languages[i])
 	for name in sorted(names[WikiPage.languages[i]]):
-		s += '<a href="%s.html">%s</a><br/>\n' % (name,name)
+		s += '<a href="{0}.html">{0}</a><br/>\n'.format(name)
 	f.write(s+'</div>')
 f.write('''</div><div style="clear:both"/><hr />
 	<div class="last">

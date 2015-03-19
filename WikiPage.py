@@ -1,10 +1,17 @@
 #!/usr/local/bin/python3
-import os
-import sys
+# -*- coding: utf-8 -*-
 
 languages = ('English', 'German', 'French', 'Dutch', 'Russian')
-flags =     ('EN'     , 'DE'    , 'FR'    , 'NL'   , 'RU'     )
-code = ('**','[[','`')
+flags     = ('EN'     , 'DE'    , 'FR'    , 'NL'   , 'RU'     )
+code = ('**', '[[', '`')
+
+formats = {
+	'figure':
+		'<div class="fig">'+
+		'<a href="http://github.com/slebok/sleg/blob/master/figures/{0}">'+
+		'<img src="http://github.com/slebok/sleg/raw/master/figures/{0}" alt="{1}" title="{1}"/>'+
+		'</a><br/>(<a href="http://github.com/slebok/sleg/blob/master/figures/{0}.info.txt">info</a>)</div>'
+}
 
 class Bunch:
 	def __init__(self, **kwds):
@@ -16,7 +23,7 @@ class WikiPage:
 		self.order = []
 		self.sections = {}
 		self.orders = {}
-		f = open(fname,'r')
+		f = open(fname, 'r', encoding="utf-8")
 		self.text = f.readlines()
 		f.close()
 		cur = ''
@@ -29,12 +36,12 @@ class WikiPage:
 				# skip lines before the first section
 				continue
 			# TODO: shitty condition!
-			if line[2]=='_':
+			if line[2] == '_':
 				for s in line[2:].split('; '):
 					z = s.strip()
 					if z.startswith('_') and z.endswith('_'):
 						z = z[1:-1]
-					self.addValue(cur,'Terms',z)
+					self.addValue(cur, 'Terms', z)
 				continue
 			wrds = line.split(': ')
 			if len(wrds) > 1:
@@ -49,18 +56,18 @@ class WikiPage:
 					e = MDText(rhs)
 				else:
 					e = Entry(rhs)
-				self.addValue(cur,lhs,e)
+				self.addValue(cur, lhs, e)
 			elif line.strip():
-				print('Strange line:',line)
-	def getValues(self,key1,key2):
+				print('Strange line:', line)
+	def getValues(self, key1, key2):
 		if key1 not in self.sections.keys() or key2 not in self.sections[key1].keys():
 			return []
 		return self.sections[key1][key2]
-	def getKeys(self,key):
+	def getKeys(self, key):
 		if key not in self.sections.keys():
 			return []
 		return self.orders[key]
-	def addValue(self,key1,key2,v):
+	def addValue(self, key1, key2, v):
 		if key1 not in self.sections.keys():
 			self.sections[key1] = {}
 			self.order.append(key1)
@@ -72,7 +79,7 @@ class WikiPage:
 	def who(self):
 		return self.__class__.__name__
 	def validate(self):
-		lines = list(filter(lambda x:x,map(lambda x:x.strip(),self.text)))
+		lines = [x.strip() for x in self.text if x.strip()]
 		for line in str(self).split('\n'):
 			if not line:
 				continue
@@ -84,13 +91,13 @@ class WikiPage:
 			print(' * The original has unmatched line "%s"' % line)
 	def getLanguages(self):
 		return sorted(self.sections.keys())
-	def getNames(self,lang):
-		return self.getValues(lang,'Terms') + self.getValues(lang,'Short')
+	def getNames(self, lang):
+		return self.getValues(lang, 'Terms') + self.getValues(lang, 'Short')
 	def getKeywords(self):
 		kws = []
 		for lang in sorted(self.orders.keys()):
 			kws.append(lang)
-			kws.extend(self.getValues(lang,'Terms'))
+			kws.extend(self.getValues(lang, 'Terms'))
 		return kws
 	def getHtml(self, main):
 		s = '''<?xml version="1.0" encoding="UTF-8"?>
@@ -113,41 +120,41 @@ class WikiPage:
 			<div>[<a href="mailto:vadim@grammarware.net">Complain!</a>]</div>
 		</div>
 		<div class="main">
-		''' % ('; '.join(self.getKeywords()), main, self.main.split('.md')[0].replace(' ','-'))
+		''' % ('; '.join(self.getKeywords()), main, self.main.split('.md')[0].replace(' ', '-'))
 		for lang in languages:
 			if lang not in self.sections.keys():
 				continue
 			# main loop
 			# TODO: do not hyperlink self-references
-			s += '<h2>%s</h2>\n<ul><li>' % Flagged(lang)
+			s += '<h2>{0}</h2>\n<ul><li>'.format(Flagged(lang))
 			# s += '<ul><li>%s</li>\n' % '; '.join(['<strong>%s</strong>' % s for s in self.sections[lang].terms])
 			ts = []
 			# for t in self.sections[lang].terms:
-			for t in self.getValues(lang,'Terms'):
+			for t in self.getValues(lang, 'Terms'):
 				if t == main:
 					ts.append('<strong>%s</strong>' % t)
 				else:
-					ts.append('<a href="%s.html"><strong>%s</strong></a>' % (t,t))
+					ts.append('<a href="%s.html"><strong>%s</strong></a>' % (t, t))
 			s += '; '.join(ts)
 			if 'Short' in self.getKeys(lang):
 				z = []
-				for short in self.getValues(lang,'Short'):
+				for short in self.getValues(lang, 'Short'):
 					if short == main or not short.text.isalnum():
-						z.append('%s' % short.getHtml())
+						z.append(short.getHtml())
 					else:
-						z.append('<a href="%s.html">%s</a>' % (short,short.getHtml()))
+						z.append('<a href="%s.html">%s</a>' % (short, short.getHtml()))
 				s += ' (%s)' % '; '.join(z)
 			s += '</li>\n'
 			for k in self.getKeys(lang):
-				for rhs in self.getValues(lang,k):
-					if k == 'Short' or k == 'Terms':
+				for rhs in self.getValues(lang, k):
+					if k in ('Short', 'Terms'):
 						continue
 					elif k == 'Figure':
-						s += '<div class="fig"><a href="http://github.com/slebok/sleg/blob/master/figures/%s"><img src="http://github.com/slebok/sleg/raw/master/figures/%s" alt="%s" title="%s"/></a><br/>(<a href="http://github.com/slebok/sleg/blob/master/figures/%s.info.txt">info</a>)</div>' % (rhs, rhs, main, main, rhs)
+						s += formats['figure'].format(rhs, main)
 					elif k == 'Definition':
-						s += '<li class="def">%s</li>\n' % rhs.getHtml()
+						s += '<li class="def">{}</li>\n'.format(rhs.getHtml())
 					else:
-						s += '<li>%s: %s</li>' % (k,rhs.getHtml())
+						s += '<li>{0}: {1}</li>'.format(k, rhs.getHtml())
 			s += '</ul>'
 		# Last updated: %s.<br/>
 		return s+'''</div><div style="clear:both"/><hr />
@@ -161,12 +168,12 @@ class WikiPage:
 	def __str__(self):
 		s = ''
 		for lang in self.order:
-			s += '\n## %s\n* %s\n' % (lang,'; '.join(['_%s_' % s for s in self.getValues(lang,'Terms')]))
+			s += '\n## %s\n* %s\n' % (lang, '; '.join(['_%s_' % s for s in self.getValues(lang, 'Terms')]))
 			for k in self.getKeys(lang):
 				if k == 'Terms':
 					continue
-				for v in self.getValues(lang,k):
-					s += '* %s: %s\n' % (k,v)
+				for v in self.getValues(lang, k):
+					s += '* %s: %s\n' % (k, v)
 		return s.strip()+'\n'
 		if self.fig:
 			s += '* Figure: %s\n' % self.fig
@@ -203,7 +210,7 @@ class Entry:
 		return self.__class__.__name__
 	def getHtml(self):
 		if self.text.startswith('http://'):
-			return '<a class="src" href="%s">%s</a>' % (self.text,self.text)
+			return '<a class="src" href="%s">%s</a>' % (self.text, self.text)
 		elif self.text.startswith('`'):
 			return '<code>%s</code>' % self.text.split('`')[1]
 		else:
@@ -232,7 +239,7 @@ class MDText:
 				self.chunks.append(MDCode(s[1:j]))
 				s = s[j+1:]
 			else:
-				seq = list(filter(lambda x:x!=-1,map(lambda x:s.find(x),code)))
+				seq = [x for x in [s.find(x) for x in code] if x != -1]
 				if len(seq) < 1:
 					j = len(s)
 				else:
@@ -241,10 +248,10 @@ class MDText:
 				s = s[j:]
 	def getHtml(self):
 		# present as HTML
-		return ''.join(map(lambda x:x.getHtml(),self.chunks))
+		return ''.join([x.getHtml() for x in self.chunks])
 	def __str__(self):
 		# present as Markdown
-		return ''.join(map(str,self.chunks))
+		return ''.join(map(str, self.chunks))
 
 # not good with nesting
 class MDBold:
@@ -261,14 +268,14 @@ class MDLink:
 		if s.find('|') < 0:
 			self.goal = self.text = s
 		else:
-			self.text,self.goal = s.split('|')
+			self.text, self.goal = s.split('|')
 	def getHtml(self):
 		return '<a href="%s.html">%s</a>' % (self.goal, self.text) # .capitalize()?
 	def __str__(self):
 		if self.goal == self.text:
 			return '[[%s]]' % self.text
 		else:
-			return '[[%s|%s]]' % (self.text,self.goal)
+			return '[[%s|%s]]' % (self.text, self.goal)
 
 class MDCode:
 	def __init__(self, s):
