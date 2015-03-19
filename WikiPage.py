@@ -1,17 +1,11 @@
 #!/usr/local/bin/python3
 # -*- coding: utf-8 -*-
 
+from Formatting import TEMPLATES
+
 languages = ('English', 'German', 'French', 'Dutch', 'Russian')
 flags     = ('EN'     , 'DE'    , 'FR'    , 'NL'   , 'RU'     )
 code = ('**', '[[', '`')
-
-formats = {
-	'figure':
-		'<div class="fig">'+
-		'<a href="http://github.com/slebok/sleg/blob/master/figures/{0}">'+
-		'<img src="http://github.com/slebok/sleg/raw/master/figures/{0}" alt="{1}" title="{1}"/>'+
-		'</a><br/>(<a href="http://github.com/slebok/sleg/blob/master/figures/{0}.info.txt">info</a>)</div>'
-}
 
 class Bunch:
 	def __init__(self, **kwds):
@@ -100,27 +94,7 @@ class WikiPage:
 			kws.extend(self.getValues(lang, 'Terms'))
 		return kws
 	def getHtml(self, main):
-		s = '''<?xml version="1.0" encoding="UTF-8"?>
-		<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
-		<html xmlns="http://www.w3.org/1999/xhtml" xmlns:xhtml="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
-		<head>
-			<meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
-			<meta name="keywords" content="software linguistics, software language engineering, book of knowledge, glossary, %s"/>
-			<title>SLEBOK — SLEG — %s</title>
-			<link href="../www/sleg.css" rel="stylesheet" type="text/css"/>
-		</head>
-		<body>
-		<div class="left">
-			<a href="index.html"><img src="../www/sleg.200.png" alt="Software Language Engineering Glossary (SLEG)" class="pad"/></a><br/>
-			<div class="pad">[<a href="http://github.com/slebok/sleg/%s/_edit">Edit!</a>]</div><br/>
-			<a href="http://creativecommons.org/licenses/by-sa/4.0/" title="CC-BY-SA"><img src="../www/cc-by-sa.png" alt="CC-BY-SA"/></a><br/>
-			<a href="http://creativecommons.org/licenses/by-sa/4.0/" title="Open Knowledge"><img src="../www/open-knowledge.png" alt="Open Knowledge" class="pad" /></a><br/>
-			<a href="http://validator.w3.org/check/referer" title="XHTML 1.0 W3C Rec"><img src="../www/xhtml.88.png" alt="XHTML 1.0 W3C Rec" /></a><br/>
-			<a href="http://jigsaw.w3.org/css-validator/check/referer" title="CSS 2.1 W3C CanRec"><img src="../www/css.88.png" alt="CSS 2.1 W3C CanRec" class="pad" /></a><br/>
-			<div>[<a href="mailto:vadim@grammarware.net">Complain!</a>]</div>
-		</div>
-		<div class="main">
-		''' % ('; '.join(self.getKeywords()), main, self.main.split('.md')[0].replace(' ', '-'))
+		s = TEMPLATES['pagehead'].format('; '.join(self.getKeywords()), main, self.main.split('.md')[0].replace(' ', '-'))
 		for lang in languages:
 			if lang not in self.sections.keys():
 				continue
@@ -150,21 +124,14 @@ class WikiPage:
 					if k in ('Short', 'Terms'):
 						continue
 					elif k == 'Figure':
-						s += formats['figure'].format(rhs, main)
+						s += TEMPLATES['figure'].format(rhs, main)
 					elif k == 'Definition':
 						s += '<li class="def">{}</li>\n'.format(rhs.getHtml())
 					else:
 						s += '<li>{0}: {1}</li>'.format(k, rhs.getHtml())
 			s += '</ul>'
 		# Last updated: %s.<br/>
-		return s+'''</div><div style="clear:both"/><hr />
-		<div class="last">
-			<em>
-				<a href="http://github.com/slebok/sleg">Software Language Engineering Glossary</a> (SLEG) is
-				created and maintained by <a href="http://grammarware.net">Dr. Vadim Zaytsev</a>.<br/>
-				Hosted as a part of <a href="http://slebok.github.io/">SLEBOK</a> on <a href="http://www.github.com/">GitHub</a>.
-			</em>
-		</div></body></html>'''
+		return s+TEMPLATES['footer']
 	def __str__(self):
 		s = ''
 		for lang in self.order:
